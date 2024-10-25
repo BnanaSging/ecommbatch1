@@ -1,11 +1,22 @@
-<?php
-require_once("includes\\header.php");
+
+<?php 
+
+    session_start();
+    require_once("includes\header.php");
+
+    if(isset($_SESSION["error"])){
+        $messageErr = $_SESSION["error"];
+        unset($_SESSION["error"]);
+    }
+
+    if(isset($_SESSION["success"])){
+        $messageSucc = $_SESSION["success"];
+        unset($_SESSION["success"]);
+    }
 ?>
 
     <!-- Navbar -->
-    <?php
-require_once("includes\\navbar.php");
-?>
+    <?php require_once("includes\\navbar.php"); ?>
 
     <!-- Registration Form -->
     <div class="container mt-5">
@@ -16,28 +27,28 @@ require_once("includes\\navbar.php");
                         <h4>Create Your Account</h4>
                     </div>
                     <div class="card-body">
-                    <!-- message response -->
-                    <?php if(isset($_GET["success"])){ ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                       <strong> <?php echo $_GET["success"];?> </strong> 
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <!-- message response -->
+                        <?php if(isset($messageSucc)){ ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong><?php echo $messageSucc; ?></strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                    <?php } ?>
+                        <?php } ?>    
 
-                    <?php if(isset($_GET["error"])){ ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                       <strong><?php echo $_GET["error"];?></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <?php if(isset($messageErr)){ ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><?php echo $messageErr; ?></strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <?php } ?>
-                        <form action="authRegister.php" method="POST">
+                        <?php } ?>    
+                        <form action="app/auth/Register.php" method="POST">
                             <div class="mb-3">
-                                <label for="FullName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="FullName" name="FullName" placeholder="Enter your full name" required>
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your Username" required>
+                                <label for="username" class="form-label">Email Address</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
