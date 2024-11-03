@@ -11,7 +11,7 @@
     </div> 
 
     </body>
-    </html>
+    </hmtl>
     <?php 
     exit;
     }

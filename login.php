@@ -1,10 +1,10 @@
 <?php 
-    require_once($_SERVER["DOCUMENT_ROOT"]."/app/config/Directories.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/app/config/Directories.php");
     require_once(ROOT_DIR."includes\header.php");
 ?>
 
     <!-- Navbar -->
-    <?php require_once(ROOT_DIR."includes\\navbar.php"); ?>
+    <?php require_once("includes\\navbar.php"); ?>
 
     <!-- Login Form -->
     <div class="container mt-5">
@@ -40,5 +40,4 @@
     
     
 
-    <!-- Bootstrap 5 JS Bundle -->
-   <?php require_once(ROOT_DIR."includes/footer.php"); ?>
+    <?php  require_once(ROOT_DIR. "includes/footer.php"); ?>
