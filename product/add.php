@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,78 +44,83 @@
         </div>
     </nav>
 
-    <!-- Product Maintenance Form -->
-    <div class="container my-5">
-        <h2>Product Maintenance</h2>
-        <form>
-            <div class="row">
-                <!-- Left Column: Product Image -->
-                <div class="col-md-4 mb-3">
-                    <label for="productImage" class="form-label">Product Image</label>
-                    <input type="file" class="form-control" id="productImage" accept="image/*">
-                </div>
+    <?php require_once(__DIR__."/../../components/page-guard.php"); ?>
+   
+   
+    
+       
+    
+    <!-- Page Header -->
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Product List</h2>
+            <!-- Add New Product Button -->
+            <a href="product-maintenance.html" class="btn btn-success">Add New Product</a>
+        </div>
+        <p class="text-center">Manage all products in the catalog</p>
+        <hr>
+    </div>
 
-                <!-- Right Column: Product Details -->
-                <div class="col-md-8">
-                    <div class="row">
-                        <!-- Product Name -->
-                        <div class="col-md-12 mb-3">
-                            <label for="productName" class="form-label">Product Name</label>
-                            <input type="text" class="form-control" id="productName" placeholder="Enter product name">
-                        </div>
-
-                        <!-- Product Category -->
-                        <div class="col-md-12 mb-3">
-                            <label for="category" class="form-label">Category</label>
-                            <select id="category" class="form-select">
-                                <option selected>Choose a category</option>
-                                <option value="1">Electronics</option>
-                                <option value="2">Fashion</option>
-                                <option value="3">Home Appliances</option>
-                                <!-- Add more categories as needed -->
-                            </select>
-                        </div>
+    <!-- Product Cards Container -->
+    <div class="container content mt-3">
+        <div class="row">
+            <!-- Sample Product Card -->
+            <!-- Loop through each product and generate a card dynamically -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Product Name 1</h5>
+                        <p class="card-text">Category: Electronics</p>
+                        <p class="card-text">Price: $100</p>
+                        <p class="card-text">Stock: 50</p>
+                        <p class="card-text">Sold: 50</p>
+                        <p class="card-text">profit: 50</p>
+                        <a href="#" class="btn btn-primary">Edit Product</a>
+                        <a href="#" class="btn btn-danger">Delete Product</a>
                     </div>
-
-                    <div class="row">
-                        <!-- Number of Stocks -->
-                        <div class="col-md-4 mb-3">
-                            <label for="numberOfStocks" class="form-label">Number of Stocks</label>
-                            <input type="number" class="form-control" id="numberOfStocks" placeholder="Enter number of stocks" oninput="calculateTotalPrice()">
-                        </div>
-
-                        <!-- Unit Price -->
-                        <div class="col-md-4 mb-3">
-                            <label for="unitPrice" class="form-label">Unit Price</label>
-                            <input type="number" step="0.01" class="form-control" id="unitPrice" placeholder="Enter unit price" oninput="calculateTotalPrice()">
-                        </div>
-
-                        <!-- Total Price (Automatically Calculated) -->
-                        <div class="col-md-4 mb-3">
-                            <label for="totalPrice" class="form-label">Total Price</label>
-                            <input type="text" class="form-control" id="totalPrice" placeholder="Total Price" readonly>
-                        </div>
-                    </div>
-
-                    <!-- Product Description -->
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" rows="3" placeholder="Enter product description"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Save Button (aligned to right) -->
-                    <div class="row">
-                        <div class="col-md-12 d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Save Product</button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </form>
+
+            <!-- Another Product Card Example -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Product Name 2</h5>
+                        <p class="card-text">Category: Fashion</p>
+                        <p class="card-text">Price: $50</p>
+                        <p class="card-text">Stock: 25</p>
+                        <p class="card-text">Sold: 50</p>
+                        <p class="card-text">profit: 50</p>
+                        <a href="#" class="btn btn-primary">Edit Product</a>
+                        <a href="#" class="btn btn-danger">Delete Product</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example for Another Product -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Product Name 3</h5>
+                        <p class="card-text">Category: Home Appliances</p>
+                        <p class="card-text">Price: $200</p>
+                        <p class="card-text">Stock: 100</p>
+                        <p class="card-text">Sold: 50</p>
+                        <p class="card-text">profit: 50</p>
+                        <a href="#" class="btn btn-primary">Edit Product</a>
+                        <a href="#" class="btn btn-danger">Delete Product</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more product cards dynamically based on your backend data -->
+        </div>
     </div>
+
+    
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
