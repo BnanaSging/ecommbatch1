@@ -11,6 +11,8 @@ $db = new DatabaseConnect(); //make a new database instance
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    $productid = htmlspecialchars($_POST["id"]);
+    $productImage2 = htmlspecialchars($_POST["productImage2"]);
     $productName = htmlspecialchars($_POST["productName"]);
     $productDesc = htmlspecialchars($_POST["description"]);
     $category = htmlspecialchars($_POST["category"]);
@@ -23,12 +25,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         trim($unitPrice) == "" ||  trim($totalPrice) == "" ) 
     {
         $_SESSION["error"] = "Please fill in all the fields";
-        header("location: ".BASE_URL."views/admin/product/edit.php");
+        header("location: ".BASE_URL."views/admin/products/edit.php");
         exit();
     }
-    if(!isset($productImage2)  || empty($productImage2)){
+    if(!isset($productImage2) || empty($productImage2)){
         $_SESSION['error'] = 'No Image Attached';
-        header("location: ".BASE_URL."views/admin/product/edit.php");
+        header("location: ".BASE_URL."views/admin/products/edit.php");
         exit;
     }
     
@@ -42,41 +44,43 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     products.unit_price = :p_unit_price,
                     products.total_price = :p_total_price,
                     products.updated_at = NOW()
-                    WHERE products.id = :p_id ";
+                    WHERE products.id = :p_id";
 
         $stmt = $conn->prepare($sql);
         
         $data = [
-            ':p_product_name' => $productName,
+            ':p_product_name'        => $productName,
             ':p_product_description' => $productDesc,
-            ':p_category_id' => $category,
-            ':p_base_price' => $basePrice,
-            ':p_stocks' => $numberOfStocks,
-            ':p_unit_price' => $unitPrice,
-            ':p_total_price' => $totalPrice,
-            ':p_id'  =>$productId ];
+            ':p_category_id'         => $category,
+            ':p_base_price'          => $basePrice,
+            ':p_stocks'              => $numberOfStocks,
+            ':p_unit_price'          => $unitPrice,
+            ':p_total_price'         => $totalPrice, 
+            ':p_id'                  => $productid];
 
         if(!$stmt->execute($data)){
-            $_SESSION['error'] = 'Failed to Update the Record';
-            header("location: ".BASE_URL."views/admin/product/edit.php");
+            $_SESSION['error'] = 'Failed to update the Record';
+            header("location: ".BASE_URL."views/admin/products/edit.php");
             exit;
         }
 
-        $lastId = $product;
+        $lastId = $productId;
 
+        if(isset($_FILES['productImage']) && $_FILES['productImage']['error'] == 0){
         $error = processImage($lastId);
         if($error){
             $_SESSION["error"] = $error;
-            header("location: ".BASE_URL."views/admin/product/edit.php");
+            header("location: ".BASE_URL."views/admin/products/edit.php");
             exit;
         }
+    }
         
-        $_SESSION["success"] = "Product Updated successfully";
-        header("location: ".BASE_URL."views/admin/product/index.php");
+        $_SESSION["success"] = "Product updated successfully";
+        header("location: ".BASE_URL."views/admin/products/index.php");
         exit;
     } catch(Exception $e){
         $_SESSION["error"] = "Connection Failed: " . $e->getMessage();
-        header("location: ".BASE_URL."views/admin/product/edit.php");
+        header("location: ".BASE_URL."views/admin/products/add.php");
         exit;
     }
 }
