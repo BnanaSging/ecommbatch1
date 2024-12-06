@@ -3,7 +3,7 @@
 class DatabaseConnect {
 
     private $host = "localhost";
-    private $database = "ecombatch1";
+    private $database = "ecombatch1"; 
     private $dbusername = "root";
     private $dbpassword = "";
     private $conn = null;

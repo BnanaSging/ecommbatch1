@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
         //connect to database
         $host = "localhost";
-        $database = "ecombatch1";
+        $database = "ecommb1";
         $dbusername = "root";
         $dbpassword = "";
 

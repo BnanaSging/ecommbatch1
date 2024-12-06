@@ -105,7 +105,7 @@ require_once(__DIR__."/../../components/page-guard.php");
                     <input type="file" class="form-control" id="productImage" name="productImage" accept="image/*">
 
                     <div class="mt-3">
-                        <img id="imagePreview" src="<?php echo BASE_URL.$product["image_url"]; ?>" alt="Image Preview" class="img-fluid" style="display: block; max-height: 300px;">
+                        <img id="imagePreview" src="<?php echo BASE_URL.$product["image_url"]; ?>" alt="Image Preview" class="img-fluid" style="display: none; max-height: 300px;">
                     </div>
                 </div>
 
